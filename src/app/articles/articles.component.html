@@ -1,0 +1,42 @@
+<input type="text" name="textFilter" [(ngModel)]="textFilter"/>
+<h1 class="font-weight-bold">Listes des articles :</h1> 
+  <ul *ngIf="filteredArticles" class="card-deck">
+      <div *ngFor="let art of filteredArticles" >
+          <div class="card bg-light m-3 p-3">
+              <div class="card-header" style="margin: 0rem -1rem;margin-top: -1rem;">
+                  {{art.titre|uppercase}}
+                </div>
+            <img class="card-img-top my-3" [src]="pathPrefix+art.url[0]" [alt]="art.titre"  width="318" height="180">
+            <div class="card-body">
+              <h4 class="card-title">{{art.prix}} <small class="text-muted">Promotion: <span *ngIf="art.promotionValue==0; else onPromotion">Aucune</span>
+                <ng-template #onPromotion>
+                    {{art.promotionValue}}%
+                </ng-template></small></h4>
+              <p class="card-text">{{art.description|lowercase|underscorePipe:'a':'@'}}</p>
+              <p>{{ date|date:fullDate }}</p>
+              <a href="#" class="btn btn-primary">Voir ce produit</a>
+            </div>
+          </div>
+        </div>
+  </ul>
+<br><br>
+    
+
+    
+
+
+
+<!-- <b>Titre:</b>  {{art.titre}}<br><br>
+<b>Description:</b> Description: {{art.description}}<br><br>
+<b>Prix:</b>  {{art.prix}}<br><br>
+<b>Promotion:</b>  <div *ngIf="art.promotionValue==0; else onPromotion">Aucune </div>
+<ng-template #onPromotion>
+    {{art.promotionValue}}
+</ng-template>
+<br><br>
+<b>Images:</b> 
+<ul *ngIf="art.url">
+    <li *ngFor="let img of art.url">
+      <img [src]="pathPrefix+img" alt="" width="100" height="50"> <br><br>
+    </li>
+</ul> -->

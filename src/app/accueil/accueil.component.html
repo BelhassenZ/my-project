@@ -1,0 +1,22 @@
+<h1 class="font-weight-bold">Listes des articles :</h1> 
+<ul *ngIf="articles" class="card-deck">
+    <div *ngFor="let art of articles" class="col-4" >
+        <div class="card bg-light my-3 p-3">
+            <div class="card-header" style="margin: 0rem -1rem;margin-top: -1rem;">
+                {{art.titre|uppercase}}
+              </div>
+          <img class="card-img-top my-3" [src]="articleService.pathPrefix+art.url" [alt]="art.titre"  width="auto" height="190">
+          <div class="card-body">
+            <h4 class="card-title">{{art.prix}} DT <small class="text-muted">Promotion: <span *ngIf="art.promotionValue==0; else onPromotion">Aucune</span>
+              <ng-template #onPromotion>
+                  {{art.promotionValue}}%
+              </ng-template></small></h4>
+              <p class="card-text">{{art.description}}</p>
+            <!-- <p class="card-text">{{art.description|lowercase|underscorePipe:'a':'@'}}</p> -->
+            <p>{{ date|date:fullDate }}</p>
+            <a [href]="'article/'+art.id" class="btn btn-primary">Voir ce produit</a>
+          </div>
+        </div>
+      </div>
+</ul>
+<br><br>

@@ -1,0 +1,20 @@
+<div class="card-deck">
+    <ul *ngIf="article">
+            <div class="card bg-light m-3 p-3">
+                <div class="card-header" style="margin: 0rem -1rem;margin-top: -1rem;">
+                    {{article.titre|uppercase}}
+                </div>
+            <img class="card-img-top my-3" [src]="articleService.pathPrefix+article.url" [alt]="article.titre"  width="318" height="180">
+            <div class="card-body">
+                <h4 class="card-title">{{article.prix}} <small class="text-muted">Promotion: <span *ngIf="article.promotionValue==0; else onPromotion">Aucune</span>
+                <ng-template #onPromotion>
+                    {{article.promotionValue}}%
+                </ng-template></small></h4>
+                <p class="card-text">{{article.description|lowercase|underscorePipe:'a':'@'}}</p>
+                <p>{{ date|date:fullDate }}</p>
+                <a href="#" class="btn btn-primary">Voir ce produit</a>
+            </div>
+            </div>
+    </ul>
+</div>
+<br><br>

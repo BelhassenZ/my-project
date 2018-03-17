@@ -1,0 +1,35 @@
+<form #myAddForm="ngForm" ngNativeValidate>
+  <label for="nom">Nom:</label><input type="text" id="nom" name="nom" class="form-control" [(ngModel)]="utilisateur.nom" required><br>
+  <label for="prenom">Prénom: </label><input type="text" id="prenom" name="prenom" class="form-control" [(ngModel)]="utilisateur.prenom" required><br>
+  <label for="email">Email: </label><input type="email" id="email" name="email" class="form-control" [(ngModel)]="utilisateur.email" required><br>
+  <label for="mdp">Mot de passe: </label><input type="password" id="mdp" name="mdp" class="form-control" [(ngModel)]="utilisateur.mdp" required><br>
+  <button class="btn btn-success" (click)="onSubmit()" [disabled]="!myAddForm.valid" >Ajouter</button>
+  <button class="btn btn-danger" (click)="myAddForm.reset()" >Annuler</button>
+</form>
+
+
+
+<br><br>
+<span *ngIf="utilisateurs.length==0; else userExist"><h4>Aucun Utilisateur</h4><br></span>
+<ng-template #userExist>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th ># ID</th>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Email</th>
+          <th>Supprimer</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr  *ngFor="let usr of utilisateurs">
+          <td>{{usr.id}}</td>
+          <td>{{usr.nom}}</td>
+          <td>{{usr.prenom}}</td>
+          <td>{{usr.email}}</td>
+          <td><button (click)="onSupp(usr.id)" class="btn btn-danger">Supp</button></td>
+        </tr>
+      </tbody>
+    </table>
+</ng-template>
